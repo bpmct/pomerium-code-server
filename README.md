@@ -1,4 +1,4 @@
-# demo-pomerium-code-server
+# pomerium-code-server
 
 docker-compose example with Pomerium and code-server. Requirements:
 
