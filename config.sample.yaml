@@ -1,0 +1,38 @@
+# See detailed configuration settings : https://www.pomerium.io/docs/reference/reference/
+
+# this is the domain the identity provider will callback after a user authenticates
+authenticate_service_url: https://authenticate.localhost.pomerium.io
+
+# certificate settings:  https://www.pomerium.io/docs/reference/certificates.html
+# autocert: true
+certificates:
+  - cert: "/pomerium/cert.pem"
+    key: "/pomerium/privkey.pem"
+
+# REMOVE FOR PRODUCTION
+autocert_use_staging: true
+
+# identity provider settings : https://www.pomerium.io/docs/identity-providers.html
+idp_provider: github
+idp_client_id: ""
+idp_client_secret: ""
+# necessary for allowed-groups
+idp_service_account: ""
+
+# Generate 256 bit random keys  e.g. `head -c32 /dev/urandom | base64`
+cookie_secret: WwMtDXWaRDMBQCylle8OJ+w4kLIDIGd8W3cB4/zFFtg=
+
+# https://www.pomerium.io/configuration/#policy
+policy:
+  - from: https://verify.localhost.pomerium.io
+    to: https://verify.pomerium.com
+    allowed_users:
+      - your@email.com
+      - another.email@example.com
+    pass_identity_headers: true
+  - from: https://code.localhost.pomerium.io
+    to: http://codeserver:8080
+    allowed_users:
+      - your@email.com
+      - another.email@example.com
+    allow_websockets: true
